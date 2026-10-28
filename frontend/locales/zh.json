@@ -1,0 +1,39 @@
+{
+  "common": {
+    "welcome": "欢迎来到 Andaman Breeze Tours",
+    "subtitle": "尊享高端旅游与快艇体验",
+    "login": "登录",
+    "email": "电子邮件",
+    "password": "密码",
+    "submit": "登录",
+    "view_details": "查看详情"
+  },
+  "home": {
+    "hero_title": "与 Andaman Breeze 一起探索安达曼",
+    "featured_tours": "热门尊享豪华行程",
+    "=== SEO ===": "=== SHOW SEO ===",
+    "meta_title": "Andaman Breeze Tours - 高端旅游与快艇体验",
+    "meta_description": "与 Andaman Breeze Tours 一起探索安达曼海，体验普吉岛、攀牙湾和甲米的高端旅游与快艇之旅。"
+  },
+  "tours": {
+    "eyebrow": "探索安达曼海",
+    "title": "探索我们的旅游行程",
+    "description": "与 Andaman Breeze Tours 一起探索安达曼海的岛屿、海滩与难忘体验。"
+  },
+  "tour_detail": {
+    "eyebrow": "行程详情",
+    "description": "行程介绍",
+    "duration": "行程时长",
+    "days": "天",
+    "nights": "晚",
+    "group_type": "团队类型",
+    "tour_type": "行程类型",
+    "max_seats": "最多座位数",
+    "adult_price": "成人价格",
+    "child_price": "儿童价格",
+    "promo_price": "优惠价格",
+    "low_season_price": "淡季价格",
+    "charter_price": "私人包船价格",
+    "back_to_tours": "返回全部行程"
+  }
+}

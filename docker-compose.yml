@@ -1,0 +1,125 @@
+# Andaman Breeze - Docker Compose
+
+services:
+  # 1. Reverse Proxy (Gateway)
+  reverse-proxy:
+    image: nginx:1.25-alpine
+    container_name: andaman_reverse_proxy
+    restart: unless-stopped
+    ports:
+      - "${HOST_HTTP_PORT:-8080}:80"
+      - "${HOST_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./backend:/var/www/html:ro
+      - ./frontend:/usr/src/app:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - andaman_network
+
+  # 2. Frontend Application (Next.js)
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    container_name: andaman_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - andaman_network
+
+  # 3. Backend API Application (Laravel)
+  backend:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+        HOST_GID: ${HOST_GID:-1000}
+    container_name: andaman_backend
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - database
+      - cache-queue
+    networks:
+      - andaman_network
+
+  # 4. Async Queue Worker (Laravel Worker)
+  queue-worker:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+        HOST_GID: ${HOST_GID:-1000}
+    container_name: andaman_queue_worker
+    restart: unless-stopped
+    command: php artisan queue:work --verbose --tries=3 --timeout=90
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - backend
+      - cache-queue
+    networks:
+      - andaman_network
+
+  # 5. Relational Database (PostgreSQL)
+  database:
+    image: postgres:16-alpine
+    container_name: andaman_database
+    restart: unless-stopped
+    ports:
+      - "${HOST_DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-andaman_pearl_proj}
+      POSTGRES_USER: ${DB_USERNAME:-farook}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-1234}
+    volumes:
+      - andaman_postgres_data:/var/lib/postgresql/data
+    networks:
+      - andaman_network
+
+  # 6. Memory Cache & Queue Broker (Redis)
+  cache-queue:
+    image: redis:7-alpine
+    container_name: andaman_cache_queue
+    restart: unless-stopped
+    ports:
+      - "${HOST_REDIS_PORT:-6379}:6379"
+    volumes:
+      - andaman_redis_data:/data
+    networks:
+      - andaman_network
+
+  # 7. Local Email Capture (Mailpit)
+  mail-pit:
+    image: axllent/mailpit:latest
+    container_name: andaman_mailpit
+    restart: unless-stopped
+    ports:
+      - "${HOST_MAIL_PORT:-8025}:8025"
+    networks:
+      - andaman_network
+
+networks:
+  andaman_network:
+    name: andaman_network
+    driver: bridge
+
+volumes:
+  andaman_postgres_data:
+    name: andaman_postgres_data
+  andaman_redis_data:
+    name: andaman_redis_data

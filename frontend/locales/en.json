@@ -1,0 +1,39 @@
+{
+  "common": {
+    "welcome": "Welcome to Andaman Breeze Tours",
+    "subtitle": "Premium Tours & Speedboat Experiences",
+    "login": "Login",
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Sign In",
+    "view_details": "View Details"
+  },
+  "home": {
+    "hero_title": "Discover Andaman with Andaman Breeze",
+    "featured_tours": "Our Featured Premium Packages",
+    "=== SEO ===": "=== SHOW SEO ===",
+    "meta_title": "Andaman Breeze Tours - Premium Tours & Speedboat Experiences",
+    "meta_description": "Discover the Andaman Sea with Andaman Breeze Tours. Enjoy premium tours and speedboat experiences across Phuket, Phang Nga, and Krabi."
+  },
+  "tours": {
+    "eyebrow": "EXPLORE THE ANDAMAN",
+    "title": "Discover Our Tours",
+    "description": "Explore the islands, beaches, and unforgettable experiences of the Andaman Sea with Andaman Breeze Tours."
+  },
+  "tour_detail": {
+    "eyebrow": "TOUR DETAILS",
+    "description": "Description",
+    "duration": "Duration",
+    "days": "days",
+    "nights": "nights",
+    "group_type": "Group type",
+    "tour_type": "Tour type",
+    "max_seats": "Maximum seats",
+    "adult_price": "Adult price",
+    "child_price": "Child price",
+    "promo_price": "Promotional price",
+    "low_season_price": "Low-season price",
+    "charter_price": "Private charter",
+    "back_to_tours": "Back to all tours"
+  }
+}

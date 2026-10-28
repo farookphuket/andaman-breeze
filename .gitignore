@@ -1,0 +1,51 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+!.env.*.example
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build output and caches
+.next/
+.next.backup*/
+out/
+coverage/
+*.tsbuildinfo
+
+# Logs and temporary files
+*.log
+.DS_Store
+
+# Local editor settings
+.vscode/
+.idea/
+
+# Local diagnostics and machine-specific output
+/diagnose_output.txt
+/ask_ai/output_now.txt
+
+# Local patch and project backups
+/ask_ai/backup-*/
+/ask_ai/backups/
+/backend/*.backup-*
+/backend/routes/*.backup-*
+
+/backend/bootstrap/*.backup-*
+
+# Local databases and database exports
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql
+
+# Local diagnostic output
+/diagnose_output.txt
+/ask_ai/output_now.txt
